@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import './env';
-import './db';
 import routes from './app/routes';
 import * as errorHandler from './middlewares/errorHandler';
 
