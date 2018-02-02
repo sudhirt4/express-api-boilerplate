@@ -1,28 +1,43 @@
-import Boom from 'boom';
+import Boom from "boom";
 
-import models from '../../models';
-import * as crypt from '../../utils/crypt';
-import * as tokenUtils from '../../utils/token';
+import models from "../../models";
+import * as crypt from "../../utils/crypt";
+import * as tokenUtils from "../../utils/token";
 
 const { User } = models;
 
-export async function login(userParams) {
-  let user = await User.fetchByEmail(userParams.email);
+export async function login(loginParams = {}) {
+  let user = await User.fetchByEmail(loginParams.email);
   if (!user) {
     throw Boom.badRequest(User.CONSTRAINTS.INVALID_CRED.message);
   }
   let userJSON = user.responseJSON();
 
-  let matchPassword = await crypt.compare(userParams.password, user.get('password'));
+  let matchPassword = await crypt.compare(
+    loginParams.password,
+    user.get("password")
+  );
   if (!matchPassword) {
     throw Boom.badRequest(User.CONSTRAINTS.INVALID_CRED.message);
   }
 
   let tokens = tokenUtils.generateAuthTokens(userJSON);
 
-  return { tokens };
+  return { ...tokens };
+}
+
+export async function refresh(userParams = {}) {
+  let user = await User.fetchByEmail("sudhirshresthaktm+11111@gmail.com");
+  if (!user) {
+    throw Boom.badRequest(User.CONSTRAINTS.INVALID_CRED.message);
+  }
+  let userJSON = user.responseJSON();
+
+  let tokens = tokenUtils.generateAuthTokens(userJSON);
+
+  return { ...tokens };
 }
 
 export async function logout() {
-  return 'Logout';
+  return "Logout";
 }

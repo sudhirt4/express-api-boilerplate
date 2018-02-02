@@ -1,18 +1,13 @@
-import HttpStatus from '../constants/httpStatus';
+import HttpStatus from "../constants/httpStatus";
+import MESSAGES from "../constants/messages";
+import * as joiValidationUtils from "./joiValidation";
 
 export function buildError(err) {
-  if (err.isJoi || err instanceof SyntaxError) {
+  if (err.isJoi) {
     return {
       code: HttpStatus.BAD_REQUEST.code,
-      message: HttpStatus.BAD_REQUEST.message,
-      details:
-        err.details &&
-        err.details.map(err => {
-          return {
-            message: err.message,
-            param: err.path
-          };
-        })
+      message: MESSAGES.VALIDATION_ERROR,
+      details: err.details && joiValidationUtils.normalizeErrors(err)
     };
   }
 
