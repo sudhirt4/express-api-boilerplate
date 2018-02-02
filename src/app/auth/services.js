@@ -21,9 +21,9 @@ export async function login(loginParams = {}) {
     throw Boom.badRequest(User.CONSTRAINTS.INVALID_CRED.message);
   }
 
-  let tokens = tokenUtils.generateAuthTokens(userJSON);
+  let token = tokenUtils.generateAuthTokens(userJSON);
 
-  return { ...tokens };
+  return { token };
 }
 
 export async function refresh(userParams = {}) {
@@ -33,9 +33,9 @@ export async function refresh(userParams = {}) {
   }
   let userJSON = user.responseJSON();
 
-  let tokens = tokenUtils.generateAuthTokens(userJSON);
+  let token = tokenUtils.generateAuthTokens(userJSON);
 
-  return { ...tokens };
+  return { token };
 }
 
 export async function logout() {

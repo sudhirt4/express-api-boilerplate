@@ -29,7 +29,7 @@ export function generateAuthTokens(encryptedData) {
     REFRESH_TOKEN_SALT
   );
 
-  return { accessToken, refreshToken };
+  return { access: accessToken, refresh: refreshToken };
 }
 
 export function verifyAccessToken(jwtToken) {
