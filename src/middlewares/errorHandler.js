@@ -1,5 +1,5 @@
-import { buildError } from "../utils/errorHandler";
-import HttpStatus from "../constants/httpStatus";
+import { buildError } from '../utils/errorHandler';
+import HttpStatus from '../constants/httpStatus';
 
 export function generic(err, req, res, next) {
   if (err.stack) {

@@ -1,6 +1,6 @@
-import HttpStatus from "../constants/httpStatus";
-import MESSAGES from "../constants/messages";
-import * as joiValidationUtils from "./joiValidation";
+import HttpStatus from '../constants/httpStatus';
+import MESSAGES from '../constants/messages';
+import * as joiValidationUtils from './joiValidation';
 
 export function buildError(err) {
   if (err.isJoi) {

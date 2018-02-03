@@ -1,9 +1,11 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 export const login = {
-  email: Joi.string()
-    .email()
-    .max(50)
-    .required(),
-  password: Joi.required()
+  user: {
+    email: Joi.string()
+      .email()
+      .max(50)
+      .required(),
+    password: Joi.required()
+  }
 };

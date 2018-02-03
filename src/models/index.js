@@ -28,6 +28,7 @@ fs
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
+    console.log('herer', modelName);
     db[modelName].associate(db);
   }
 });

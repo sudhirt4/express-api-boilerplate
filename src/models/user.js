@@ -13,19 +13,26 @@ module.exports = (sequelize, DataTypes) => {
   let UserDefinition = sequelize.define(
     'User',
     {
-      firstName: { type: DataTypes.STRING, field: 'first_name' },
-      lastName: { type: DataTypes.STRING, field: 'last_name' },
-      email: { type: DataTypes.STRING, field: 'email' },
-      password: { type: DataTypes.STRING, field: 'password' }
+      firstName: {
+        type: DataTypes.STRING,
+        field: 'first_name'
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        field: 'last_name'
+      },
+      email: {
+        type: DataTypes.STRING,
+        field: 'email'
+      },
+      password: {
+        type: DataTypes.STRING,
+        field: 'password'
+      }
     },
     {
       underscored: true,
-      tableName: 'users',
-      classMethods: {
-        associate: function() {
-          // associations can be defined here
-        }
-      }
+      tableName: 'users'
     }
   );
 

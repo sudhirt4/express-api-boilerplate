@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-map",
+    "start:dev":
+      "nodemon --watch .env --watch src --exec babel-node src --source-map",
     "build": "rm -rf dist && babel src -D --out-dir dist",
+    "sequelize": "sequelize",
     "migrate": "sequelize db:migrate",
     "make:migration": "sequelize model:generate --underscored",
+    "migrate:undo": "sequelize db:migrate:undo",
     "test": "echo Testing..",
     "lint": "eslint src test; exit 0",
     "lint:fix": "eslint src test --fix; exit 0",
-    "prettify": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" && eslint src test --fix; exit 0",
+    "prettify":
+      "prettier --single-quote --print-width 120 --write \"src/**/*.js\" && eslint src test --fix; exit 0",
     "postinstall": "npm run build"
   },
   "author": "",
@@ -27,7 +31,8 @@
     "jsonwebtoken": "^8.1.0",
     "pg": "^7.4.1",
     "sequelize": "^4.31.2",
-    "sequelize-cli": "^3.2.0"
+    "sequelize-cli": "^3.2.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 export const USER_SCHEMA = {
   firstName: Joi.string()

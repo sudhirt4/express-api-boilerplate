@@ -1,5 +1,5 @@
-import * as schema from "./schemas";
-import * as validator from "../../utils/validator";
+import * as schema from './schemas';
+import * as validator from '../../utils/validator';
 
 export function create(req, res, next) {
   return validator

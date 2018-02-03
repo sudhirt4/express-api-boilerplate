@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 export function validate(data, schema, options = {}) {
   options = {

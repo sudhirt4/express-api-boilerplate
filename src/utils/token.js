@@ -1,30 +1,28 @@
-import jwt from "jsonwebtoken";
-import {
-  ACCESS_TOKEN_SALT,
-  ACCESS_TOKEN_EXPIRY,
-  REFRESH_TOKEN_SALT,
-  REFRESH_TOKEN_EXPIRY
-} from "../constants/token";
+import jwt from 'jsonwebtoken';
+
+import { ACCESS_TOKEN_SALT, ACCESS_TOKEN_EXPIRY, REFRESH_TOKEN_SALT, REFRESH_TOKEN_EXPIRY } from '../constants/token';
 
 function getUnixTimeStamp(date) {
   return Math.floor(date / 1000);
 }
 
-export function generateAuthTokens(encryptedData) {
+export function generateAuthTokens(encryptedData, options = {}) {
+  let { skipRefresh, deviceId } = options;
   let accessTokenExpiry = parseInt(ACCESS_TOKEN_EXPIRY) * 60;
+
   let accessToken = jwt.sign(
     {
-      data: encryptedData,
+      data: { payload: encryptedData, id: deviceId },
       exp: getUnixTimeStamp(Date.now()) + accessTokenExpiry
     },
     ACCESS_TOKEN_SALT
   );
 
-  let refreshTokenExpiry = parseInt(REFRESH_TOKEN_EXPIRY) * 60;
+  if (skipRefresh) {return { access: accessToken };}
+
   let refreshToken = jwt.sign(
     {
-      data: encryptedData,
-      exp: getUnixTimeStamp(Date.now()) + refreshTokenExpiry
+      data: { payload: encryptedData, id: deviceId }
     },
     REFRESH_TOKEN_SALT
   );
@@ -34,4 +32,8 @@ export function generateAuthTokens(encryptedData) {
 
 export function verifyAccessToken(jwtToken) {
   return jwt.verify(jwtToken, ACCESS_TOKEN_SALT);
+}
+
+export function verifyRefreshToken(jwtToken) {
+  return jwt.verify(jwtToken, REFRESH_TOKEN_SALT);
 }

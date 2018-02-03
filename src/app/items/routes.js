@@ -1,22 +1,22 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import { authenticate } from "../../middlewares/authenticate";
+import { authenticate } from '../../middlewares/authenticate';
 
 let router = Router();
 
 let items = [
   {
     id: 1,
-    name: "Desk"
+    name: 'Desk'
   },
   {
     id: 2,
-    name: "Chair"
+    name: 'Chair'
   }
 ];
 
-//TODO:
-router.get("/", authenticate, (req, res, next) => {
+// TODO:
+router.get('/', authenticate, (req, res, next) => {
   res.json({ items });
 });
 
