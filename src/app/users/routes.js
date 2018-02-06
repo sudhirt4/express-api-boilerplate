@@ -6,8 +6,10 @@ import * as validators from './validators';
 let router = Router();
 
 router.post('/', validators.create, (req, res, next) => {
+  const { user } = req.body;
+  
   return services
-    .create(req.body)
+    .create(user)
     .then(data => res.json(data))
     .catch(err => next(err));
 });

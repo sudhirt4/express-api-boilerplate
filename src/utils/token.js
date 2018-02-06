@@ -18,7 +18,9 @@ export function generateAuthTokens(encryptedData, options = {}) {
     ACCESS_TOKEN_SALT
   );
 
-  if (skipRefresh) {return { access: accessToken };}
+  if (skipRefresh) {
+    return { access: accessToken };
+  }
 
   let refreshToken = jwt.sign(
     {

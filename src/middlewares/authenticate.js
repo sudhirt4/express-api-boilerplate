@@ -1,11 +1,11 @@
-import Boom from "boom";
+import Boom from 'boom';
 
-import * as TokenUtils from "../utils/token";
-import MESSAGES from "../constants/messages";
-import { AuthDevice } from "../models";
+import * as TokenUtils from '../utils/token';
+import MESSAGES from '../constants/messages';
+import { AuthDevice } from '../models';
 
 export async function authenticate(req, res, next) {
-  const accessToken = req.get("authorization");
+  const accessToken = req.get('authorization');
   try {
     const decoded = TokenUtils.verifyAccessToken(accessToken);
     const deviceId = decoded.data.id;
@@ -17,6 +17,6 @@ export async function authenticate(req, res, next) {
 
     next();
   } catch (err) {
-    throw Boom.unauthorized(MESSAGES.INVALID_TOKEN);
+    next(Boom.unauthorized(MESSAGES.INVALID_TOKEN));
   }
 }

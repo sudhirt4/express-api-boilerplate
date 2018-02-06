@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "start:dev":
-      "nodemon --watch .env --watch src --exec babel-node src --source-map",
+    "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-map",
     "build": "rm -rf dist && babel src -D --out-dir dist",
     "sequelize": "sequelize",
     "migrate": "sequelize db:migrate",
@@ -15,8 +14,7 @@
     "test": "echo Testing..",
     "lint": "eslint src test; exit 0",
     "lint:fix": "eslint src test --fix; exit 0",
-    "prettify":
-      "prettier --single-quote --print-width 120 --write \"src/**/*.js\" && eslint src test --fix; exit 0",
+    "prettify": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" && eslint src test --fix; exit 0",
     "postinstall": "npm run build"
   },
   "author": "",

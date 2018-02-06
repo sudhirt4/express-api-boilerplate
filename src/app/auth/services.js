@@ -43,7 +43,9 @@ export async function refresh(refreshToken) {
     let authDevice = await AuthDevice.findById(data.id);
     let userJSON = data.payload;
 
-    if (!authDevice) {throw 'error';}
+    if (!authDevice) {
+      throw 'error';
+    }
 
     let token = tokenUtils.generateAuthTokens(userJSON, {
       deviceId: id,
