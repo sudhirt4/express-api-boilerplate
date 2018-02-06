@@ -7,7 +7,7 @@ let router = Router();
 
 router.post('/', validators.create, (req, res, next) => {
   const { user } = req.body;
-  
+
   return services
     .create(user)
     .then(data => res.json(data))

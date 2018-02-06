@@ -1,5 +1,5 @@
 import * as UsersSchema from '../../common/schemas/users';
-import * as validator from '../../utils/validator';
+import * as validator from '../../common/utils/validator';
 
 export function create(req, res, next) {
   return validator
