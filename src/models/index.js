@@ -1,5 +1,3 @@
-'use strict';
-
 let fs = require('fs');
 let path = require('path');
 let Sequelize = require('sequelize');
@@ -28,7 +26,6 @@ fs
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
-    console.log('herer', modelName);
     db[modelName].associate(db);
   }
 });

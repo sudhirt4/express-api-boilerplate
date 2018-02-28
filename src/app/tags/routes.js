@@ -14,18 +14,18 @@ router.get('/', authenticate, (req, res, next) => {
 });
 
 router.post('/', authenticate, validators.create, (req, res, next) => {
-  let { item } = req.body;
+  let { tag } = req.body;
   services
-    .create(item)
+    .create(tag)
     .then(data => res.json(data))
     .catch(err => next(err));
 });
 
 router.put('/:id', authenticate, validators.create, (req, res, next) => {
-  let { item } = req.body;
+  let { tag } = req.body;
   let id = req.params.id;
   services
-    .update(id, item)
+    .update(id, tag)
     .then(data => res.json(data))
     .catch(err => next(err));
 });

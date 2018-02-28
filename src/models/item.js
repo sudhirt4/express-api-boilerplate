@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   let ItemDefinition = sequelize.define(
     'Item',
@@ -19,10 +18,12 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   class Item extends ItemDefinition {
-    responseJSON() {
-      let json = this.toJSON();
-
-      return json;
+    static associate(models) {
+      Item.belongsToMany(models.Tag, {
+        through: 'item_tags',
+        foreign_key: 'item_id',
+        as: 'tags'
+      });
     }
   }
 
