@@ -6,14 +6,24 @@ import * as crypt from '../../utils/crypt';
 import * as tokenUtils from '../../utils/token';
 import MESSAGES from '../../constants/messages';
 
-const { User, AuthDevice } = models;
+const { User, Role, AuthDevice } = models;
 
 export async function login(params = {}, deviceParams = {}) {
-  let user = await User.fetchByEmail(params.email);
+  let user = await User.fetchByEmail(params.email, {
+    include: [
+      {
+        model: Role,
+        as: 'roles',
+        through: { attributes: [] }
+      }
+    ]
+  });
+
   if (!user) {
     throw Boom.badRequest(User.CONSTRAINTS.INVALID_CRED.message);
   }
-  let userJSON = user.responseJSON();
+  let userJSON = user.toJSON();
+  delete userJSON.password;
 
   let matchPassword = await crypt.compare(params.password, user.get('password'));
   if (!matchPassword) {
@@ -33,7 +43,8 @@ export async function login(params = {}, deviceParams = {}) {
   });
 
   return {
-    token
+    token,
+    user: userJSON
   };
 }
 

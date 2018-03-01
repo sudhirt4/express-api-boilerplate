@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  let TagDefinition = sequelize.define(
-    'Tag',
+  let RoleDefinition = sequelize.define(
+    'Role',
     {
       name: {
         type: DataTypes.STRING,
@@ -12,19 +12,19 @@ module.exports = (sequelize, DataTypes) => {
     {
       underscored: true,
       timestamps: true,
-      tableName: 'tags'
+      tableName: 'roles'
     }
   );
 
-  class Tag extends TagDefinition {
+  class Role extends RoleDefinition {
     static associate(models) {
-      Tag.belongsToMany(models.Item, {
-        through: 'item_tags',
-        foreignKey: 'tag_id',
-        as: 'items'
+      Role.belongsToMany(models.User, {
+        through: 'user_roles',
+        foreignKey: 'role_id',
+        as: 'users'
       });
     }
   }
 
-  return Tag;
+  return Role;
 };

@@ -28,6 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         field: 'password'
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        field: 'created_at'
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: 'updated_at'
       }
     },
     {
@@ -37,15 +45,20 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   class User extends UserDefinition {
-    responseJSON() {
-      let json = this.toJSON();
-      delete json['password'];
-
-      return json;
+    static fetchByEmail(email, options) {
+      return User.find({
+        where: { email },
+        ...options,
+        plain: true
+      });
     }
 
-    static fetchByEmail(email) {
-      return User.find({ where: { email } });
+    static associate(models) {
+      User.belongsToMany(models.Role, {
+        through: 'user_roles',
+        foreignKey: 'user_id',
+        as: 'roles'
+      });
     }
   }
 

@@ -3,10 +3,13 @@ module.exports = (sequelize, DataTypes) => {
     'AuthDevice',
     {
       userId: { type: DataTypes.STRING, field: 'user_id' },
-      lastUsedAt: { type: DataTypes.DATE, field: 'last_used_at' }
+      lastUsedAt: { type: DataTypes.DATE, field: 'last_used_at' },
+      createdAt: { type: DataTypes.DATE, field: 'created_at' },
+      updatedAt: { type: DataTypes.DATE, field: 'updated_at' }
     },
     {
       underscored: true,
+      timestamps: true,
       tableName: 'auth_devices'
     }
   );

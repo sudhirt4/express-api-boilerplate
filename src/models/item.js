@@ -9,10 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.STRING,
         field: 'description'
-      }
+      },
+      createdAt: { type: DataTypes.DATE, field: 'created_at' },
+      updatedAt: { type: DataTypes.DATE, field: 'updated_at' }
     },
     {
       underscored: true,
+      timestamps: true,
       tableName: 'items'
     }
   );
@@ -21,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Item.belongsToMany(models.Tag, {
         through: 'item_tags',
-        foreign_key: 'item_id',
+        foreignKey: 'item_id',
         as: 'tags'
       });
     }
