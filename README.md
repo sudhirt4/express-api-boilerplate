@@ -1,4 +1,4 @@
-# React Redux Typescript Boilerplate
+# Express API Boilerplate
 
 > Opinionated boilerplate reference codebase
 
@@ -27,7 +27,7 @@
 4. Run migration
 
    ```
-   npm run migrate
+   yarn migrate
    ```
 
 5. Start development server
