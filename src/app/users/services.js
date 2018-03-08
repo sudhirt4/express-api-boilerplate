@@ -9,7 +9,7 @@ export async function create(data) {
   try {
     let password = await crypt.encrypt(data.password);
     let user = await User.create({ ...data, password });
-    let userJSON = user.responseJSON();
+    let userJSON = user.toJSON();
 
     return userJSON;
   } catch (err) {

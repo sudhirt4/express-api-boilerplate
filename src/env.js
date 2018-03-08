@@ -1,3 +1,5 @@
 import dotenv from 'dotenv';
 
-dotenv.config({ path: __dirname + '/../.env' });
+let envFileName = process.env.NODE_ENV === 'test' ? '.env.test' : '.env';
+
+dotenv.config({ path: __dirname + '/../' + envFileName });

@@ -5,16 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-map",
+    "start:dev":
+      "nodemon --watch .env --watch src --exec babel-node src --source-map",
     "build": "rm -rf dist && babel src -D --out-dir dist",
     "sequelize": "sequelize",
     "migrate": "sequelize db:migrate",
     "make:migration": "sequelize model:generate --underscored",
     "migrate:undo": "sequelize db:migrate:undo",
-    "test": "echo Testing..",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "eslint src test; exit 0",
     "lint:fix": "eslint src test --fix; exit 0",
-    "prettify": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" && eslint src test --fix; exit 0",
+    "prettify":
+      "prettier --single-quote --print-width 120 --write \"src/**/*.js\" && eslint src test --fix; exit 0",
     "postinstall": "npm run build"
   },
   "author": "",
@@ -25,6 +28,7 @@
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "jest": "^22.4.2",
     "joi": "^13.1.1",
     "jsonwebtoken": "^8.1.0",
     "pg": "^7.4.1",
@@ -46,5 +50,18 @@
   "engines": {
     "node": ">= 6.9.0",
     "npm": ">= 3.10.8"
+  },
+  "jest": {
+    "globalSetup": "./jest-initialize.js",
+    "testEnvironment": "jest-environment-node",
+    "collectCoverageFrom": ["**/*.{js,jsx}"],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/coverage/",
+      "/src/migrations/",
+      "/src/common"
+    ]
   }
 }
