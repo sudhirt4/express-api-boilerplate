@@ -1,10 +1,10 @@
 import Boom from 'boom';
 import uuidv4 from 'uuid/v4';
 
-import models from '../../models';
-import * as crypt from '../../utils/crypt';
-import * as tokenUtils from '../../utils/token';
-import MESSAGES from '../../constants/messages';
+import models from '../models';
+import * as crypt from '../utils/crypt';
+import * as tokenUtils from '../utils/token';
+import MESSAGES from '../constants/messages';
 
 const { User, Role, AuthDevice } = models;
 

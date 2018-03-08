@@ -1,7 +1,7 @@
 import Boom from 'boom';
 
-import models from '../../models';
-import * as crypt from '../../utils/crypt';
+import models from '../models';
+import * as crypt from '../utils/crypt';
 
 const { User } = models;
 

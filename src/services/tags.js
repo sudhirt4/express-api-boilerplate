@@ -1,9 +1,9 @@
 import Boom from 'boom';
 import uuidv4 from 'uuid/v4';
 
-import models from '../../models';
+import models from '../models';
 
-import MESSAGES from '../../constants/messages';
+import MESSAGES from '../constants/messages';
 
 const { Tag } = models;
 

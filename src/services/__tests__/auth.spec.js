@@ -1,8 +1,8 @@
-import * as AuthServices from '../services';
+import * as AuthServices from '../auth';
 
-import Model from '../../../models';
-import * as UserServices from '../../users/services';
-import * as TokenUtils from '../../../utils/token';
+import * as UserServices from '../users';
+import Model from '../../models';
+import * as TokenUtils from '../../utils/token';
 
 const sampleUser = {
   firstName: 'John',
