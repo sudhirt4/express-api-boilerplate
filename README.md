@@ -22,16 +22,30 @@
    cp .env.example .env
    ```
 
-   * Replace with your environment variables in .env
+4. Replace with your environment variables in .env
 
-4. Run migration
+5. Run migration
 
    ```
    yarn migrate
    ```
 
-5. Start development server
+6. Start development server
 
    ```
-   yarn dev:start
+   yarn start:dev
+   ```
+
+7. Setup test
+
+   > Setup test database
+
+   ```
+   cp .env .env.test
+   ```
+
+   > Running test
+
+   ```
+   yarn test:watch
    ```
