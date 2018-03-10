@@ -1,8 +1,7 @@
 import Boom from 'boom';
-
-import models from '../models';
 import * as crypt from '../utils/crypt';
 
+import models from '../models';
 const { User } = models;
 
 export async function create(data) {
@@ -13,8 +12,11 @@ export async function create(data) {
 
     return userJSON;
   } catch (err) {
-    if (err.original && err.original.constraint === User.CONSTRAINTS.UNIQUE_EMAIL.key) {
-      throw Boom.badRequest(User.CONSTRAINTS.UNIQUE_EMAIL.message);
+    if (
+      err.original &&
+      err.original.constraint === User.objects.CONSTRAINTS.UNIQUE_EMAIL.key
+    ) {
+      throw Boom.badRequest(User.objects.CONSTRAINTS.UNIQUE_EMAIL.message);
     }
 
     throw err;

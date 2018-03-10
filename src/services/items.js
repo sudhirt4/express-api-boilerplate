@@ -1,34 +1,13 @@
-import Boom from 'boom';
-import uuidv4 from 'uuid/v4';
-
 import models from '../models';
-
-import MESSAGES from '../constants/messages';
-
-const { Item, Tag } = models;
+const { Item } = models;
 
 export async function fetchAll() {
-  return await Item.findAll({
-    include: [
-      {
-        model: Tag,
-        as: 'tags',
-        through: { attributes: [] }
-      }
-    ]
-  });
+  return await Item.objects.findAllWithTags();
 }
 
 export async function retreive(id) {
-  return await Item.findOne({
-    where: { id },
-    include: [
-      {
-        model: Tag,
-        as: 'tags',
-        through: { attributes: [] }
-      }
-    ]
+  return await Item.objects.findOneWithTags({
+    where: { id }
   });
 }
 
@@ -53,9 +32,7 @@ export async function update(id, data) {
   delete data.tags;
 
   await models.sequelize.transaction(async transaction => {
-    let item = await Item.findOne({
-      where: { id }
-    });
+    let item = await Item.findById(id);
     await item.updateAttributes(data, { transaction });
     await item.setTags(tags, { transaction });
 

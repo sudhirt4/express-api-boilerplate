@@ -56,6 +56,7 @@
     "testEnvironment": "jest-environment-node",
     "collectCoverageFrom": ["**/*.{js,jsx}"],
     "collectCoverage": true,
+    "testPathIgnorePatterns": ["/node_modules/", "/dist/"],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/dist/",

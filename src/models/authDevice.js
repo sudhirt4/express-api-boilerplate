@@ -1,5 +1,7 @@
+import AuthDeviceManager from '../managers/authDevices';
+
 module.exports = (sequelize, DataTypes) => {
-  let AuthDeviceDefinition = sequelize.define(
+  const AuthDevice = sequelize.define(
     'AuthDevice',
     {
       id: {
@@ -20,14 +22,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  class AuthDevice extends AuthDeviceDefinition {
-    static associate(models) {
-      AuthDevice.belongsTo(models.User, {
-        foreignKey: 'user_id',
-        targetKey: 'id'
-      });
-    }
-  }
+  AuthDevice.associate = models => {
+    AuthDevice.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      targetKey: 'id',
+      as: 'users'
+    });
+  };
+
+  AuthDevice.objects = new AuthDeviceManager(AuthDevice);
 
   return AuthDevice;
 };

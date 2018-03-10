@@ -1,33 +1,27 @@
 import Boom from 'boom';
 import uuidv4 from 'uuid/v4';
 
-import models from '../models';
 import * as crypt from '../utils/crypt';
 import * as tokenUtils from '../utils/token';
 import MESSAGES from '../constants/messages';
+import models from '../models';
 
-const { User, Role, AuthDevice } = models;
+const { User, AuthDevice } = models;
 
 export async function login(params = {}, deviceParams = {}) {
-  let user = await User.fetchByEmail(params.email, {
-    include: [
-      {
-        model: Role,
-        as: 'roles',
-        through: { attributes: [] }
-      }
-    ]
-  });
-
+  let user = await User.objects.fetchByEmail(params.email);
   if (!user) {
-    throw Boom.badRequest(User.CONSTRAINTS.INVALID_CRED.message);
+    throw Boom.badRequest(User.objects.CONSTRAINTS.INVALID_CRED.message);
   }
   let userJSON = user.toJSON();
   delete userJSON.password;
 
-  let matchPassword = await crypt.compare(params.password, user.get('password'));
+  let matchPassword = await crypt.compare(
+    params.password,
+    user.get('password')
+  );
   if (!matchPassword) {
-    throw Boom.badRequest(User.CONSTRAINTS.INVALID_CRED.message);
+    throw Boom.badRequest(User.objects.CONSTRAINTS.INVALID_CRED.message);
   }
 
   let deviceId = uuidv4();
@@ -37,8 +31,8 @@ export async function login(params = {}, deviceParams = {}) {
 
   await AuthDevice.create({
     id: deviceId,
-    lastUsedAt: new Date(),
     userId: user.id,
+    lastUsedAt: new Date(),
     ...deviceParams
   });
 

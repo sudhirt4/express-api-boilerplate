@@ -1,5 +1,7 @@
+import TagManager from '../managers/tags';
+
 module.exports = (sequelize, DataTypes) => {
-  let TagDefinition = sequelize.define(
+  const Tag = sequelize.define(
     'Tag',
     {
       name: {
@@ -16,15 +18,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  class Tag extends TagDefinition {
-    static associate(models) {
-      Tag.belongsToMany(models.Item, {
-        through: 'item_tags',
-        foreignKey: 'tag_id',
-        as: 'items'
-      });
-    }
-  }
+  Tag.associate = models => {
+    Tag.belongsToMany(models.Item, {
+      through: 'item_tags',
+      foreignKey: 'tag_id',
+      as: 'items'
+    });
+  };
+
+  Tag.objects = new TagManager(Tag);
 
   return Tag;
 };

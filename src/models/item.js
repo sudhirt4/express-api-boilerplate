@@ -1,5 +1,7 @@
+import ItemManager from '../managers/items';
+
 module.exports = (sequelize, DataTypes) => {
-  let ItemDefinition = sequelize.define(
+  const Item = sequelize.define(
     'Item',
     {
       name: {
@@ -20,15 +22,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  class Item extends ItemDefinition {
-    static associate(models) {
-      Item.belongsToMany(models.Tag, {
-        through: 'item_tags',
-        foreignKey: 'item_id',
-        as: 'tags'
-      });
-    }
-  }
+  Item.associate = models => {
+    Item.belongsToMany(models.Tag, {
+      through: 'item_tags',
+      foreignKey: 'item_id',
+      as: 'tags'
+    });
+  };
+
+  Item.objects = new ItemManager(Item);
 
   return Item;
 };

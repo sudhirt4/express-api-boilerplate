@@ -1,5 +1,7 @@
+import RoleManager from '../managers/roles';
+
 module.exports = (sequelize, DataTypes) => {
-  let RoleDefinition = sequelize.define(
+  const Role = sequelize.define(
     'Role',
     {
       name: {
@@ -16,15 +18,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  class Role extends RoleDefinition {
-    static associate(models) {
-      Role.belongsToMany(models.User, {
-        through: 'user_roles',
-        foreignKey: 'role_id',
-        as: 'users'
-      });
-    }
-  }
+  Role.associate = models => {
+    Role.belongsToMany(models.User, {
+      through: 'user_roles',
+      foreignKey: 'role_id',
+      as: 'users'
+    });
+  };
+
+  Role.objects = new RoleManager(Role);
 
   return Role;
 };

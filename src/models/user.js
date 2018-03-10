@@ -1,16 +1,7 @@
-const USER_CONSTRAINTS = {
-  UNIQUE_EMAIL: {
-    key: 'users_email_key',
-    message: 'Email has already been taken.'
-  },
-  INVALID_CRED: {
-    key: 'not_found',
-    message: 'Invalid email or password'
-  }
-};
+import UserManager from '../managers/users';
 
 module.exports = (sequelize, DataTypes) => {
-  let UserDefinition = sequelize.define(
+  const User = sequelize.define(
     'User',
     {
       firstName: {
@@ -44,25 +35,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  class User extends UserDefinition {
-    static fetchByEmail(email, options) {
-      return User.find({
-        where: { email },
-        ...options,
-        plain: true
-      });
-    }
+  User.associate = models => {
+    User.belongsToMany(models.Role, {
+      through: 'user_roles',
+      foreignKey: 'user_id',
+      as: 'roles'
+    });
+  };
 
-    static associate(models) {
-      User.belongsToMany(models.Role, {
-        through: 'user_roles',
-        foreignKey: 'user_id',
-        as: 'roles'
-      });
-    }
-  }
-
-  User.CONSTRAINTS = USER_CONSTRAINTS;
+  User.objects = new UserManager(User);
 
   return User;
 };
