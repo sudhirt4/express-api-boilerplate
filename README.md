@@ -1,5 +1,8 @@
 # Express API Boilerplate
 
+[![Build Status](https://travis-ci.org/sudhirt4/express-api-boilerplate.svg?branch=master)](https://travis-ci.org/sudhirt4/express-api-boilerplate)
+[![codecov](https://codecov.io/gh/sudhirt4/express-api-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/sudhirt4/express-api-boilerplate)
+
 > Opinionated boilerplate reference codebase
 
 ## Setup

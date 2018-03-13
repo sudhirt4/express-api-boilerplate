@@ -12,12 +12,13 @@
     "migrate": "sequelize db:migrate",
     "make:migration": "sequelize model:generate --underscored",
     "migrate:undo": "sequelize db:migrate:undo",
-    "test": "jest",
+    "test": "jest --forceExit",
     "test:watch": "jest --watch",
     "lint": "eslint src test; exit 0",
     "lint:fix": "eslint src test --fix; exit 0",
     "prettify":
       "prettier --single-quote --print-width 120 --write \"src/**/*.js\" && eslint src test --fix; exit 0",
+    "codecov": "cat coverage/lcov.info | codecov",
     "postinstall": "npm run build"
   },
   "author": "",
@@ -25,6 +26,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "boom": "^7.1.1",
+    "codecov": "^3.0.0",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",

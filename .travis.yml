@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "9"
+  # - "8"
+  # - "7"
+  # - "6"
+services:
+  - postgresql
+before_script:
+  - cp .env.example .env
+  - cp .env.example .env.test
+  - psql -c 'create database testing;' -U postgres
+  - NODE_ENV=test npm run migrate
+script:
+  - npm run test
+after_script:
+  - npm run codecov
+  
+git:
+  submodules: false
+
+before_install:
+  - git submodule update --init --recursive

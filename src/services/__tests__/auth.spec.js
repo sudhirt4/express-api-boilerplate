@@ -33,7 +33,9 @@ describe('login', () => {
           email: sampleUser.email,
           password: sampleUser.password
         });
-        let { id } = TokenUtils.verifyRefreshToken(loginResponse.token.refresh).data;
+        let { id } = TokenUtils.verifyRefreshToken(
+          loginResponse.token.refresh
+        ).data;
         deviceId = id;
       });
 
