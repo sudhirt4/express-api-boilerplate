@@ -15,6 +15,6 @@ ratings:
 exclude_paths:
 - dist/*
 - src/migrations/*
-- /**/*.spec.js
+- /**/**.spec.js
 - coverage/**/*
 - node_modules/**/*
