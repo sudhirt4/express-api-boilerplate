@@ -12,10 +12,7 @@ export async function create(data) {
 
     return userJSON;
   } catch (err) {
-    if (
-      err.original &&
-      err.original.constraint === User.objects.CONSTRAINTS.UNIQUE_EMAIL.key
-    ) {
+    if (err.original && err.original.constraint === User.objects.CONSTRAINTS.UNIQUE_EMAIL.key) {
       throw Boom.badRequest(User.objects.CONSTRAINTS.UNIQUE_EMAIL.message);
     }
 
