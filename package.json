@@ -34,7 +34,7 @@
     "joi": "^13.1.1",
     "jsonwebtoken": "^8.1.0",
     "pg": "^7.4.1",
-    "sequelize": "^4.31.2",
+    "sequelize": "^5.15.1",
     "sequelize-cli": "^3.2.0",
     "uuid": "^3.2.1"
   },
