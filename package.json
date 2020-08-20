@@ -24,7 +24,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^5.0.0",
     "boom": "^7.1.1",
     "codecov": "^3.0.0",
     "cors": "^2.8.4",
